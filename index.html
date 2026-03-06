@@ -12,7 +12,7 @@
   }
 
   html, body {
-    background: #f8f8f8;
+    background: transparent;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     width: 100%;
     height: 100%;
@@ -22,10 +22,9 @@
   .marquee-wrapper {
     width: 100%;
     overflow: hidden;
-    background: #f8f8f8;
-    padding: 24px 0;
+    background: transparent;
+    padding: 16px 0;
     position: relative;
-    /* Auto-altura: se expande conforme o conteúdo interno */
     display: inline-block;
   }
 
@@ -36,24 +35,23 @@
     position: absolute;
     top: 0;
     bottom: 0;
-    width: 80px;
+    width: 60px;
     z-index: 2;
     pointer-events: none;
   }
   .marquee-wrapper::before {
     left: 0;
-    background: linear-gradient(to right, #f8f8f8, transparent);
+    background: linear-gradient(to right, rgba(255,255,255,0.9), transparent);
   }
   .marquee-wrapper::after {
     right: 0;
-    background: linear-gradient(to left, #f8f8f8, transparent);
+    background: linear-gradient(to left, rgba(255,255,255,0.9), transparent);
   }
 
   .marquee-track {
     display: flex;
     align-items: center;
     width: max-content;
-    /* Animação: duração em segundos. Quanto MENOR, mais RÁPIDO. */
     animation: marquee 18s linear infinite;
   }
 
@@ -75,14 +73,12 @@
   }
 
   /* ─── MODO IMAGEM ─────────────────────────────────────────────
-     Se você tiver as URLs dos logos, use <img> dentro de .marquee-item.
-     Exemplo:
-       <div class="marquee-item">
-         <img src="URL_DO_LOGO" alt="Dotz" class="logo-img" />
-       </div>
+     Para usar imagens reais, substitua o conteúdo
+     de cada .marquee-item por:
+       <img src="SUA_URL_AQUI" alt="Nome" class="logo-img" />
   ──────────────────────────────────────────────────────────────── */
   .logo-img {
-    height: 48px;        /* Mobile: 48px */
+    height: 48px;
     width: auto;
     filter: grayscale(100%);
     opacity: 0.55;
@@ -93,7 +89,7 @@
     opacity: 1;
   }
 
-  /* ─── MODO TEXTO (fallback quando não há imagem) ─────────────── */
+  /* ─── MODO TEXTO ─────────────────────────────────────────────── */
   .logo-text {
     font-size: 15px;
     font-weight: 700;
@@ -121,14 +117,12 @@
 
   /* ─── RESPONSIVO ──────────────────────────────────────────────── */
   @media (min-width: 768px) {
-    /* Tablet: 1.5x */
     .logo-img  { height: 72px; }
     .logo-text { font-size: 18px; }
     .marquee-item { padding: 0 56px; }
   }
 
   @media (min-width: 1280px) {
-    /* Desktop: 2x */
     .logo-img  { height: 96px; }
     .logo-text { font-size: 20px; }
     .marquee-item { padding: 0 72px; }
@@ -140,14 +134,7 @@
 <div class="marquee-wrapper">
   <div class="marquee-track">
 
-    <!--
-      ════════════════════════════════════════════════
-      SEQUÊNCIA 1 — itens originais
-      Para usar imagens reais, substitua o conteúdo
-      de cada .marquee-item por:
-        <img src="SUA_URL_AQUI" alt="Nome" class="logo-img" />
-      ════════════════════════════════════════════════
-    -->
+    <!-- SEQUÊNCIA 1 -->
     <div class="marquee-item"><span class="logo-text">Dotz</span></div>
     <div class="marquee-sep"></div>
     <div class="marquee-item"><span class="logo-text">Dafiti</span></div>
@@ -169,13 +156,7 @@
     <div class="marquee-item"><span class="logo-text">Climatempo</span></div>
     <div class="marquee-sep"></div>
 
-    <!--
-      ════════════════════════════════════════════════
-      SEQUÊNCIA 2 — cópia idêntica para loop contínuo
-      NÃO remova esta sequência! Ela é necessária para
-      o efeito de fita infinita sem corte.
-      ════════════════════════════════════════════════
-    -->
+    <!-- SEQUÊNCIA 2 — cópia para loop contínuo sem corte -->
     <div class="marquee-item"><span class="logo-text">Dotz</span></div>
     <div class="marquee-sep"></div>
     <div class="marquee-item"><span class="logo-text">Dafiti</span></div>
@@ -200,19 +181,14 @@
   </div>
 </div>
 
-</body>
-
 <script>
-  // Auto-resize: comunica a altura real do conteúdo ao Wix
-  // para que o iframe se ajuste automaticamente sem altura fixa
   function reportHeight() {
     const height = document.querySelector('.marquee-wrapper').offsetHeight;
     window.parent.postMessage({ type: 'iwanttoknowtheheight', height: height }, '*');
   }
-
-  // Reporta ao carregar e ao redimensionar a janela
   window.addEventListener('load', reportHeight);
   window.addEventListener('resize', reportHeight);
 </script>
 
+</body>
 </html>
