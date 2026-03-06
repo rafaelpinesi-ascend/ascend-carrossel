@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carrossel de Clientes — Ascend Consultancy</title>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html, body {
+    background: #f8f8f8;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .marquee-wrapper {
+    width: 100%;
+    overflow: hidden;
+    background: #f8f8f8;
+    padding: 24px 0;
+    position: relative;
+    /* Auto-altura: se expande conforme o conteúdo interno */
+    display: inline-block;
+  }
+
+  /* Fade nas bordas esquerda e direita */
+  .marquee-wrapper::before,
+  .marquee-wrapper::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 80px;
+    z-index: 2;
+    pointer-events: none;
+  }
+  .marquee-wrapper::before {
+    left: 0;
+    background: linear-gradient(to right, #f8f8f8, transparent);
+  }
+  .marquee-wrapper::after {
+    right: 0;
+    background: linear-gradient(to left, #f8f8f8, transparent);
+  }
+
+  .marquee-track {
+    display: flex;
+    align-items: center;
+    width: max-content;
+    /* Animação: duração em segundos. Quanto MENOR, mais RÁPIDO. */
+    animation: marquee 18s linear infinite;
+  }
+
+  .marquee-track:hover {
+    animation-play-state: paused;
+  }
+
+  @keyframes marquee {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  .marquee-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 48px;
+    flex-shrink: 0;
+  }
+
+  /* ─── MODO IMAGEM ─────────────────────────────────────────────
+     Se você tiver as URLs dos logos, use <img> dentro de .marquee-item.
+     Exemplo:
+       <div class="marquee-item">
+         <img src="URL_DO_LOGO" alt="Dotz" class="logo-img" />
+       </div>
+  ──────────────────────────────────────────────────────────────── */
+  .logo-img {
+    height: 48px;        /* Mobile: 48px */
+    width: auto;
+    filter: grayscale(100%);
+    opacity: 0.55;
+    transition: filter 0.3s ease, opacity 0.3s ease;
+  }
+  .logo-img:hover {
+    filter: grayscale(0%);
+    opacity: 1;
+  }
+
+  /* ─── MODO TEXTO (fallback quando não há imagem) ─────────────── */
+  .logo-text {
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #555;
+    opacity: 0.6;
+    white-space: nowrap;
+    transition: color 0.3s ease, opacity 0.3s ease;
+    user-select: none;
+  }
+  .logo-text:hover {
+    color: #1A3A5C;
+    opacity: 1;
+  }
+
+  /* Separador entre itens */
+  .marquee-sep {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #ccc;
+    flex-shrink: 0;
+  }
+
+  /* ─── RESPONSIVO ──────────────────────────────────────────────── */
+  @media (min-width: 768px) {
+    /* Tablet: 1.5x */
+    .logo-img  { height: 72px; }
+    .logo-text { font-size: 18px; }
+    .marquee-item { padding: 0 56px; }
+  }
+
+  @media (min-width: 1280px) {
+    /* Desktop: 2x */
+    .logo-img  { height: 96px; }
+    .logo-text { font-size: 20px; }
+    .marquee-item { padding: 0 72px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="marquee-wrapper">
+  <div class="marquee-track">
+
+    <!--
+      ════════════════════════════════════════════════
+      SEQUÊNCIA 1 — itens originais
+      Para usar imagens reais, substitua o conteúdo
+      de cada .marquee-item por:
+        <img src="SUA_URL_AQUI" alt="Nome" class="logo-img" />
+      ════════════════════════════════════════════════
+    -->
+    <div class="marquee-item"><span class="logo-text">Dotz</span></div>
+    <div class="marquee-sep"></div>
+    <div class="marquee-item"><span class="logo-text">Dafiti</span></div>
+    <div class="marquee-sep"></div>
+    <div class="marquee-item"><span class="logo-text">FDE</span></div>
+    <div class="marquee-sep"></div>
+    <div class="marquee-item"><span class="logo-text">Carbon</span></div>
+    <div class="marquee-sep"></div>
+    <div class="marquee-item"><span class="logo-text">Vertco</span></div>
+    <div class="marquee-sep"></div>
+    <div class="marquee-item"><span class="logo-text">High Glass</span></div>
+    <div class="marquee-sep"></div>
+    <div class="marquee-item"><span class="logo-text">Simpar</span></div>
+    <div class="marquee-sep"></div>
+    <div class="marquee-item"><span class="logo-text">Benefício Certo</span></div>
+    <div class="marquee-sep"></div>
+    <div class="marquee-item"><span class="logo-text">Cappta</span></div>
+    <div class="marquee-sep"></div>
+    <div class="marquee-item"><span class="logo-text">Climatempo</span></div>
+    <div class="marquee-sep"></div>
+
+    <!--
+      ════════════════════════════════════════════════
+      SEQUÊNCIA 2 — cópia idêntica para loop contínuo
+      NÃO remova esta sequência! Ela é necessária para
+      o efeito de fita infinita sem corte.
+      ════════════════════════════════════════════════
+    -->
+    <div class="marquee-item"><span class="logo-text">Dotz</span></div>
+    <div class="marquee-sep"></div>
+    <div class="marquee-item"><span class="logo-text">Dafiti</span></div>
+    <div class="marquee-sep"></div>
+    <div class="marquee-item"><span class="logo-text">FDE</span></div>
+    <div class="marquee-sep"></div>
+    <div class="marquee-item"><span class="logo-text">Carbon</span></div>
+    <div class="marquee-sep"></div>
+    <div class="marquee-item"><span class="logo-text">Vertco</span></div>
+    <div class="marquee-sep"></div>
+    <div class="marquee-item"><span class="logo-text">High Glass</span></div>
+    <div class="marquee-sep"></div>
+    <div class="marquee-item"><span class="logo-text">Simpar</span></div>
+    <div class="marquee-sep"></div>
+    <div class="marquee-item"><span class="logo-text">Benefício Certo</span></div>
+    <div class="marquee-sep"></div>
+    <div class="marquee-item"><span class="logo-text">Cappta</span></div>
+    <div class="marquee-sep"></div>
+    <div class="marquee-item"><span class="logo-text">Climatempo</span></div>
+    <div class="marquee-sep"></div>
+
+  </div>
+</div>
+
+</body>
+
+<script>
+  // Auto-resize: comunica a altura real do conteúdo ao Wix
+  // para que o iframe se ajuste automaticamente sem altura fixa
+  function reportHeight() {
+    const height = document.querySelector('.marquee-wrapper').offsetHeight;
+    window.parent.postMessage({ type: 'iwanttoknowtheheight', height: height }, '*');
+  }
+
+  // Reporta ao carregar e ao redimensionar a janela
+  window.addEventListener('load', reportHeight);
+  window.addEventListener('resize', reportHeight);
+</script>
+
+</html>
