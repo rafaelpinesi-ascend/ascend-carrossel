@@ -5,11 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Carrossel de Clientes — Ascend Consultancy</title>
 <style>
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
   html, body {
     background: transparent;
@@ -28,24 +24,23 @@
     display: inline-block;
   }
 
-  /* Fade nas bordas esquerda e direita */
+  /* Fade nas bordas */
   .marquee-wrapper::before,
   .marquee-wrapper::after {
     content: '';
     position: absolute;
-    top: 0;
-    bottom: 0;
+    top: 0; bottom: 0;
     width: 60px;
     z-index: 2;
     pointer-events: none;
   }
   .marquee-wrapper::before {
     left: 0;
-    background: linear-gradient(to right, rgba(255,255,255,0.9), transparent);
+    background: linear-gradient(to right, rgba(255,255,255,0.95), transparent);
   }
   .marquee-wrapper::after {
     right: 0;
-    background: linear-gradient(to left, rgba(255,255,255,0.9), transparent);
+    background: linear-gradient(to left, rgba(255,255,255,0.95), transparent);
   }
 
   .marquee-track {
@@ -54,10 +49,7 @@
     width: max-content;
     animation: marquee 18s linear infinite;
   }
-
-  .marquee-track:hover {
-    animation-play-state: paused;
-  }
+  .marquee-track:hover { animation-play-state: paused; }
 
   @keyframes marquee {
     0%   { transform: translateX(0); }
@@ -68,123 +60,101 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0 48px;
+    padding: 0 40px;
     flex-shrink: 0;
   }
 
-  /* ─── MODO IMAGEM ─────────────────────────────────────────────
-     Para usar imagens reais, substitua o conteúdo
-     de cada .marquee-item por:
-       <img src="SUA_URL_AQUI" alt="Nome" class="logo-img" />
-  ──────────────────────────────────────────────────────────────── */
   .logo-img {
-    height: 48px;
+    height: 40px;
     width: auto;
+    max-width: 130px;
+    object-fit: contain;
+    mix-blend-mode: multiply;
     filter: grayscale(100%);
-    opacity: 0.55;
+    opacity: 0.6;
     transition: filter 0.3s ease, opacity 0.3s ease;
   }
+
+  .logo-img.logo-dark {
+    mix-blend-mode: screen;
+  }
+
   .logo-img:hover {
     filter: grayscale(0%);
     opacity: 1;
   }
 
-  /* ─── MODO TEXTO ─────────────────────────────────────────────── */
-  .logo-text {
-    font-size: 15px;
+  .logo-fallback {
+    display: none;
+    font-size: 13px;
     font-weight: 700;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: #555;
     opacity: 0.6;
     white-space: nowrap;
-    transition: color 0.3s ease, opacity 0.3s ease;
-    user-select: none;
-  }
-  .logo-text:hover {
-    color: #1A3A5C;
-    opacity: 1;
   }
 
-  /* Separador entre itens */
   .marquee-sep {
-    width: 6px;
-    height: 6px;
+    width: 5px; height: 5px;
     border-radius: 50%;
     background: #ccc;
     flex-shrink: 0;
   }
 
-  /* ─── RESPONSIVO ──────────────────────────────────────────────── */
   @media (min-width: 768px) {
-    .logo-img  { height: 72px; }
-    .logo-text { font-size: 18px; }
-    .marquee-item { padding: 0 56px; }
+    .logo-img  { height: 60px; max-width: 160px; }
+    .marquee-item { padding: 0 52px; }
   }
-
   @media (min-width: 1280px) {
-    .logo-img  { height: 96px; }
-    .logo-text { font-size: 20px; }
-    .marquee-item { padding: 0 72px; }
+    .logo-img  { height: 80px; max-width: 200px; }
+    .marquee-item { padding: 0 64px; }
   }
 </style>
 </head>
 <body>
 
 <div class="marquee-wrapper">
-  <div class="marquee-track">
-
-    <!-- SEQUÊNCIA 1 -->
-    <div class="marquee-item"><span class="logo-text">Dotz</span></div>
-    <div class="marquee-sep"></div>
-    <div class="marquee-item"><span class="logo-text">Dafiti</span></div>
-    <div class="marquee-sep"></div>
-    <div class="marquee-item"><span class="logo-text">FDE</span></div>
-    <div class="marquee-sep"></div>
-    <div class="marquee-item"><span class="logo-text">Carbon</span></div>
-    <div class="marquee-sep"></div>
-    <div class="marquee-item"><span class="logo-text">Vertco</span></div>
-    <div class="marquee-sep"></div>
-    <div class="marquee-item"><span class="logo-text">High Glass</span></div>
-    <div class="marquee-sep"></div>
-    <div class="marquee-item"><span class="logo-text">Simpar</span></div>
-    <div class="marquee-sep"></div>
-    <div class="marquee-item"><span class="logo-text">Benefício Certo</span></div>
-    <div class="marquee-sep"></div>
-    <div class="marquee-item"><span class="logo-text">Cappta</span></div>
-    <div class="marquee-sep"></div>
-    <div class="marquee-item"><span class="logo-text">Climatempo</span></div>
-    <div class="marquee-sep"></div>
-
-    <!-- SEQUÊNCIA 2 — cópia para loop contínuo sem corte -->
-    <div class="marquee-item"><span class="logo-text">Dotz</span></div>
-    <div class="marquee-sep"></div>
-    <div class="marquee-item"><span class="logo-text">Dafiti</span></div>
-    <div class="marquee-sep"></div>
-    <div class="marquee-item"><span class="logo-text">FDE</span></div>
-    <div class="marquee-sep"></div>
-    <div class="marquee-item"><span class="logo-text">Carbon</span></div>
-    <div class="marquee-sep"></div>
-    <div class="marquee-item"><span class="logo-text">Vertco</span></div>
-    <div class="marquee-sep"></div>
-    <div class="marquee-item"><span class="logo-text">High Glass</span></div>
-    <div class="marquee-sep"></div>
-    <div class="marquee-item"><span class="logo-text">Simpar</span></div>
-    <div class="marquee-sep"></div>
-    <div class="marquee-item"><span class="logo-text">Benefício Certo</span></div>
-    <div class="marquee-sep"></div>
-    <div class="marquee-item"><span class="logo-text">Cappta</span></div>
-    <div class="marquee-sep"></div>
-    <div class="marquee-item"><span class="logo-text">Climatempo</span></div>
-    <div class="marquee-sep"></div>
-
-  </div>
+  <div class="marquee-track" id="track"></div>
 </div>
 
 <script>
+  const BASE = 'https://rafaelpinesi-ascend.github.io/ascend-carrossel/logos/';
+
+  const empresas = [
+    { src: BASE + 'dotz (1).png',                    alt: 'Dotz',            dark: false },
+    { src: BASE + 'Dafiti.png',                      alt: 'Dafiti',          dark: false },
+    { src: BASE + 'logo_FDE.png',                    alt: 'FDE',             dark: false },
+    { src: BASE + 'Logo Carbon.webp',                alt: 'Carbon',          dark: true  },
+    { src: BASE + 'logo_vertco_2.png',               alt: 'Vertco',          dark: false },
+    { src: BASE + 'high_glass_2.png',                alt: 'High Glass',      dark: false },
+    { src: BASE + 'Logo_Simpar.jpg',                 alt: 'Simpar',          dark: false },
+    { src: BASE + 'beneficio_certo.png',             alt: 'Benefício Certo', dark: false },
+    { src: BASE + 'cappta (1).png',                  alt: 'Cappta',          dark: true  },
+    { src: BASE + 'climatempo.jpg',                  alt: 'Climatempo',      dark: false },
+  ];
+
+  function criarItem(e) {
+    const darkClass = e.dark ? 'logo-dark' : '';
+    return `
+      <div class="marquee-item">
+        <img
+          class="logo-img ${darkClass}"
+          src="${e.src}"
+          alt="${e.alt}"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
+        />
+        <span class="logo-fallback">${e.alt}</span>
+      </div>
+      <div class="marquee-sep"></div>`;
+  }
+
+  const track = document.getElementById('track');
+  track.innerHTML = empresas.map(criarItem).join('') + empresas.map(criarItem).join('');
+
   function reportHeight() {
-    const height = document.querySelector('.marquee-wrapper').offsetHeight;
-    window.parent.postMessage({ type: 'iwanttoknowtheheight', height: height }, '*');
+    const h = document.querySelector('.marquee-wrapper').offsetHeight;
+    window.parent.postMessage({ type: 'iwanttoknowtheheight', height: h }, '*');
   }
   window.addEventListener('load', reportHeight);
   window.addEventListener('resize', reportHeight);
